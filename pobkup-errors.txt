@@ -1,6 +1,0 @@
-rsync: stat "/home/fabio/Desktop/tt/.ttf-droid-20121017-6-any.pkg.tar.xz.cI4Uk8" failed: No such file or directory (2)
-
-rsync: rename "/home/fabio/Desktop/tt/.ttf-droid-20121017-6-any.pkg.tar.xz.cI4Uk8" -> "ttf-droid-20121017-6-any.pkg.tar.xz": No such file or directory (2)
-rsync: stat "/home/fabio/Desktop/tt/.wayland-protocols-1.17-1-any.pkg.tar.xz.Au76rV" failed: No such file or directory (2)
-rsync: rename "/home/fabio/Desktop/tt/.wayland-protocols-1.17-1-any.pkg.tar.xz.Au76rV" -> "wayland-protocols-1.17-1-any.pkg.tar.xz": No such file or directory (2)
-rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1189) [sender=3.1.3]
