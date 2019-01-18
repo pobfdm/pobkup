@@ -49,7 +49,7 @@ def initConfig():
 	if (not os.path.isfile(profilesFile)):
 		config = configparser.ConfigParser()
 		config.add_section('backup')
-		config['backup']['src'] = getHomeDir()
+		config['backup']['src'] = getHomeDirPath()
 		config['backup']['dst'] = ""
 		config['backup']['delete'] = "yes"
 		config['backup']['history'] = "no"

@@ -19,6 +19,7 @@ class MainApp(wx.App):
 	def init_frame(self):
 		self.proc=None
 		self.frame = self.res.LoadFrame(None, 'mainFrame')
+		self.frame.SetIcon(wx.Icon("icon.ico"))
 		self.btBackup = xrc.XRCCTRL(self.frame, 'btBackup')
 		self.lstOutput= xrc.XRCCTRL(self.frame, 'lstOutput')
 		self.cmbProfiles=xrc.XRCCTRL(self.frame, 'cmbProfiles')

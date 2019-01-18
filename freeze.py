@@ -4,7 +4,7 @@ import sys
 from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"packages": ["os","sys"], "excludes": ["tkinter"]}
+build_exe_options = {"packages": ["os","sys", "utils", "gui_utils"], "excludes": ["tkinter"]}
 
 # GUI applications require a different base on Windows (the default is for a
 # console application).
@@ -22,7 +22,6 @@ exe1 = Executable(
 
 setup(  name = "pobkup",
         version = "0.1",
-        icon="icon.ico",
         description = "A simple front end for rsync!",
         options = {"build_exe": build_exe_options},
         executables = [exe1]
