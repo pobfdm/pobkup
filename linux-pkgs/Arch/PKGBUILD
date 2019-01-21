@@ -1,0 +1,44 @@
+# Maintainer: Fabio Di Matteo <pobfdm@gmail.com>
+pkgname=pobkup
+pkgver=0.1
+pkgrel=1
+epoch=
+pkgdesc="Pobkup is a simple gui for Rsync."
+arch=('any')
+url="https://github.com/pobfdm/pobkup"
+license=('GPL')
+groups=('Utility')
+depends=('python-wxpython'  'rsync')
+makedepends=('')
+checkdepends=()
+#optdepends=('')
+provides=('pobkup')
+conflicts=('pobkup')
+replaces=()
+backup=()
+#options=( '')
+install=
+changelog=
+#source=($pkgname-$pkgver.tar.gz)
+noextract=()
+source=(https://github.com/pobfdm/pobkup/archive/master.zip)
+md5sums=('SKIP') #generate with 'makepkg -g'
+
+
+build() {
+  echo "Nothing to build..."
+  
+}
+
+
+package() {
+  mkdir -p "$pkgdir/usr/bin/"
+  mkdir -p "$pkgdir/usr/lib/pobkup/"
+  mkdir -p "$pkgdir/usr/share/applications"
+  cp "$srcdir/pobkup-master/pobkup" "$pkgdir/usr/bin/"
+  cp  "$srcdir/pobkup-master/*.py" "$pkgdir/usr/lib/pobkup/"
+  cp  "$srcdir/pobkup-master/pobkup.desktop" "$pkgdir/usr/share/applications"
+  cp -R "$srcdir/pobkup-master/icons/" "$pkgdir/usr/lib/pobkup/"
+  cp -R "$srcdir/pobkup-master/locale/" "$pkgdir/usr/lib/pobkup/"
+  cp -R "$srcdir/pobkup-master/gui/" "$pkgdir/usr/lib/pobkup/"
+}

@@ -1,0 +1,10 @@
+[Desktop Entry] 
+Type=Application
+Name=Pobkup
+GenericName=Pobkup 
+Comment=A simple gui to youtube-dl!
+Exec=pobtube
+Icon=/usr/lib/pobkup/icons/icon.png
+Terminal=FALSE
+StartupNotify=TRUE
+Categories=Utility;
