@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-import wx, threading, gettext, configparser, sys, subprocess, shlex,os
+import wx, threading, gettext, configparser, sys, subprocess, shlex,os, locale
 from gui_utils import *
 from wx import xrc
 
 import utils, gui_utils
 from profiles import *
+
+VERSION="0.1"
+
 
 class MainApp(wx.App):
 	
@@ -25,14 +28,18 @@ class MainApp(wx.App):
 		self.cmbProfiles=xrc.XRCCTRL(self.frame, 'cmbProfiles')
 		self.btEditProfile=xrc.XRCCTRL(self.frame, 'btEditProfile')
 		self.lblStatus=xrc.XRCCTRL(self.frame, 'lblStatus')
+		self.chkPoweroff=xrc.XRCCTRL(self.frame, 'chkPoweroff')
 		
 		#Getting menu
 		self.menubar = self.frame.GetMenuBar()
 		self.mnuItemExit = self.menubar.FindItemById(xrc.XRCID('mnuItemExit'))
-		self.mnuItemNewProfile = self.menubar.FindItemById(xrc.XRCID('mnuItemNewProfile'))    
+		self.mnuItemNewProfile = self.menubar.FindItemById(xrc.XRCID('mnuItemNewProfile')) 
+		self.mnuItemAbout = self.menubar.FindItemById(xrc.XRCID('mnuItemAbout'))    
+		
 		#Bind event Menu
 		self.frame.Bind(wx.EVT_MENU, self.quit, self.mnuItemExit)
 		self.frame.Bind(wx.EVT_MENU, self.newProfiles, self.mnuItemNewProfile)
+		self.frame.Bind(wx.EVT_MENU, self.onAbout, self.mnuItemAbout)
 		
 		#Init ListCtrl
 		self.lstOutput.InsertColumn(0, "File")
@@ -47,7 +54,12 @@ class MainApp(wx.App):
 		self.frame.Bind(wx.EVT_ACTIVATE, self.initComboBoxProfiles)
 		self.btEditProfile.Bind(wx.EVT_BUTTON, self.editProfile)
 		
-		#self.initComboBoxProfiles()
+		#Labels 
+		self.lblStatus.SetLabel(_("Ready."))
+		self.chkPoweroff.SetLabel(_("Poweroff at the end"))
+		self.mnuItemNewProfile.SetItemLabel(_("New Profile\tCTRL+n"))
+		self.mnuItemExit.SetItemLabel(_("Exit\tCTRL+q"))
+		
 		self.frame.Show()
 	
 	def setStatus(self,s):
@@ -67,11 +79,12 @@ class MainApp(wx.App):
 		pr.OnInit()
 	
 	def editProfile(self,evt):
-		print("Edit profile...")
 		pr= Profiles()
 		pr.OnInit()
 		pr.setProfile(self.currProfile)
-	
+		pr.dialog.Show()
+		
+		
 	def setProfile(self, evt):
 		self.currProfile=self.cmbProfiles.GetValue()
 	
@@ -101,7 +114,7 @@ class MainApp(wx.App):
 		wx.CallAfter(self.lstOutput.DeleteAllItems)	
 	
 	def getPercent(self,line):
-		# Example 11,131,595   1%   10.47MB/s    0:00:00 (xfr#16, to-chk=2761/4538)
+		# Example: 11,131,595   1%   10.47MB/s    0:00:00 (xfr#16, to-chk=2761/4538)
 		line=line.split(" ")
 		for l in line:
 			if ('%' in l):
@@ -168,6 +181,9 @@ class MainApp(wx.App):
 		self.appendOutput(_("BACKUP TERMINATED."))
 		wx.CallAfter(self.progress.SetValue,100)
 		self.setStatus(_("BACKUP TERMINATED."))
+		if(self.chkPoweroff.IsChecked()):
+			print("Poweroff")
+			utils.poweroff()
 	
 	
 	
@@ -198,13 +214,28 @@ class MainApp(wx.App):
 			self.imWorking==False
 			self.appendOutput(_("BACKUP TERMINATED BY USER."))
 		
+	
+	def onAbout(self, evt):
+		import wx.adv
+		aboutInfo = wx.adv.AboutDialogInfo()
+		aboutInfo.SetName("Pobkup")
+		aboutInfo.SetVersion(VERSION)
+		aboutInfo.SetIcon(wx.Icon('icons/icon.png', wx.BITMAP_TYPE_PNG))
+		aboutInfo.SetDescription(_("A simple gui for Rsync"))
+		aboutInfo.SetCopyright("Released under GNU/GPL v3 License \n\n Author: Fabio Di Matteo - fadimatteo@gmail.com")
+		aboutInfo.SetWebSite("https://github.com/pobfdm/pobkup")
+		aboutInfo.AddDeveloper("Fabio Di Matteo - fadimatteo@gmail.com")
+		aboutInfo.AddArtist("Arthur Zaynullin https://www.iconfinder.com/Ampeross")
+		wx.adv.AboutBox(aboutInfo)
+
 		
+			
 if __name__ == '__main__':
 	
 	#Gettext
 	try:
 		current_locale, encoding = locale.getdefaultlocale()
-		locale_path = 'languages'
+		locale_path = 'locale'
 		language = gettext.translation ('pobkup', locale_path, [current_locale] )
 		language.install()
 	except:

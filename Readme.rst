@@ -1,3 +1,4 @@
+.. image:: icons/icon.png
 ============
 Pobkup
 ============

@@ -1,0 +1,117 @@
+# Italian translations for PACKAGE package.
+# Copyright (C) 2019 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <pobfdm@gmail.com>, 2019.
+# xgettext --language=Python --keyword=_ --escape --sort-output -o template.pot pobkup.py profiles.py utils.py gui_utils.py
+msgid ""
+msgstr ""
+"Project-Id-Version: Pobkup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-18 19:05+0100\n"
+"PO-Revision-Date: 2019-01-18 19:07+0100\n"
+"Last-Translator:  <pobfdm@gmail.com>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pobkup.py:203
+msgid "BACKUP TERMINATED BY USER."
+msgstr "BACKUP TERMINATO DALL'UTENTE"
+
+#: pobkup.py:172 pobkup.py:174
+msgid "BACKUP TERMINATED."
+msgstr "BACKUP TERMINATO"
+
+#: profiles.py:48
+msgid "Cancel"
+msgstr "Annulla"
+
+#: profiles.py:47
+msgid "Delete"
+msgstr "Elimina"
+
+#: profiles.py:43
+msgid "Delete file from destination"
+msgstr "Cancella file dalla destinazione"
+
+#: pobkup.py:187
+msgid "Destination not present"
+msgstr "Destinazione non presente"
+
+#: profiles.py:42
+msgid "Destination:"
+msgstr "Destinazione:"
+
+#: profiles.py:102
+msgid "Do you want delete the profile?"
+msgstr "Vuoi cancellare questo profilo?"
+
+#: pobkup.py:61
+msgid "Do you want exit?"
+msgstr "Vuoi uscire dal programma?"
+
+#: profiles.py:112
+msgid "Error on delete profile"
+msgstr "Errore nella cancellazione del profilo"
+
+#: profiles.py:98
+msgid "Error on save profile"
+msgstr "Errore nel salvataggio del profilo"
+
+#: profiles.py:45
+msgid "Exclude path from file:"
+msgstr "Escludi percorsi dal file:"
+
+#: pobkup.py:53
+msgid "Exit\tCTRL+q"
+msgstr "Uscita\tCTRL+q"
+
+#: profiles.py:44
+msgid "History"
+msgstr "Storia"
+
+#: profiles.py:40
+msgid "Label:"
+msgstr "Etichetta:"
+
+#: pobkup.py:52
+msgid "New Profile\tCTRL+n"
+msgstr "Nuovo Profilo\tCTRL+n"
+
+#: profiles.py:39
+msgid "Profile"
+msgstr "Profilo"
+
+#: pobkup.py:159
+msgid "Progress: "
+msgstr "Progresso:"
+
+#: pobkup.py:51
+msgid "Ready."
+msgstr "Pronto."
+
+#: profiles.py:46
+msgid "Save"
+msgstr "Salva"
+
+#: pobkup.py:183
+msgid "Source not present"
+msgstr "Sorgente non presente"
+
+#: profiles.py:41
+msgid "Source:"
+msgstr "Sorgente:"
+
+#: pobkup.py:183 pobkup.py:187 profiles.py:102
+msgid "Warning"
+msgstr "Attenzione"
+
+#: profiles.py:98 profiles.py:112
+msgid "Warning!"
+msgstr "Attenzione!"
+
+msgid "Poweroff at the end"
+msgstr "Spegni al termine"

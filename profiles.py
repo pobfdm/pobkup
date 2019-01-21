@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import wx,gettext, configparser,os,utils
+import wx,gettext,locale, configparser,os,utils
 from wx import xrc
 from gui_utils import *
 
@@ -29,7 +29,29 @@ class Profiles(wx.Dialog):
 		self.btDelete.Bind(wx.EVT_BUTTON, self.delete)
 		self.btCancel.Bind(wx.EVT_BUTTON, self.closeWindow)
 		
-		self.dialog.Show()
+		
+		#Labels
+		self.lblOperation=xrc.XRCCTRL(self.dialog, 'lblOperation')
+		self.lblLabel=xrc.XRCCTRL(self.dialog, 'lblLabel')
+		self.lblSrc=xrc.XRCCTRL(self.dialog, 'lblSrc')
+		self.lblDst=xrc.XRCCTRL(self.dialog, 'lblDst')
+		self.lblExcludeFile=xrc.XRCCTRL(self.dialog,'lblExcludeFile')
+		
+		self.lblOperation.SetLabel(_("Profile"))
+		self.lblLabel.SetLabel(_("Label:"))
+		self.lblSrc.SetLabel(_("Source:"))
+		self.lblDst.SetLabel(_("Destination:"))
+		self.chkDelete.SetLabel(_("Delete file from destination"))
+		self.chkHistory.SetLabel(_("History"))
+		self.lblExcludeFile.SetLabel(_("Exclude path from file:"))
+		self.btSave.SetLabel(_("Save"))
+		self.btDelete.SetLabel(_("Delete"))
+		self.btCancel.SetLabel(_("Cancel"))
+		
+		
+		
+		
+		#self.dialog.Show()
 	
 	def closeWindow(self, evt):
 		self.dialog.Close()
@@ -93,7 +115,7 @@ class Profiles(wx.Dialog):
 #Gettext
 try:
 	current_locale, encoding = locale.getdefaultlocale()
-	locale_path = 'languages'
+	locale_path = 'locale'
 	language = gettext.translation ('pobkup', locale_path, [current_locale] )
 	language.install()
 except:

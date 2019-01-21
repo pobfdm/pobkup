@@ -131,7 +131,7 @@
 						<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<object class="wxStaticText" name="lblExcludeFile">
-							<label>Esclude path from file:</label>
+							<label>Exclude from file:</label>
 							<wrap>-1</wrap>
 						</object>
 					</object>
@@ -188,9 +188,9 @@
 						<border>5</border>
 						<object class="wxButton" name="btSave">
 							<label>Save</label>
-							<default>0</default>
+							<default>1</default>
 							<markup>0</markup>
-							<bitmap />
+							<bitmap></bitmap>
 						</object>
 					</object>
 				</object>

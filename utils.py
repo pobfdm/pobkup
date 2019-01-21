@@ -1,4 +1,4 @@
-import os, sys, configparser, shutil
+import os, sys, configparser, shutil, subprocess
 
 
 def PathWinToUnix(src):
@@ -94,4 +94,11 @@ def getTempDir():
 	import tempfile
 	return tempfile.gettempdir()+os.sep
 
-
+def poweroff():
+	if  sys.platform == 'linux':
+		subprocess.call(["systemctl", "poweroff"])
+	if sys.platform=="win32":
+		subprocess.call(["shutdown", "/s"])
+	if sys.platform == "darwin":
+		subprocess.call(['osascript', '-e','tell app "System Events" to shut down'])	
+		

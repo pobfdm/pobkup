@@ -21,6 +21,13 @@
 					<bitmap></bitmap>
 				</object>
 			</object>
+			<object class="wxMenu" name="mnuInfo">
+				<label>Info</label>
+				<object class="wxMenuItem" name="mnuItemAbout">
+					<label>About...</label>
+					<help></help>
+				</object>
+			</object>
 		</object>
 		<object class="wxBoxSizer">
 			<orient>wxVERTICAL</orient>
@@ -93,8 +100,17 @@
 				</object>
 			</object>
 			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<object class="wxCheckBox" name="chkPoweroff">
+					<label>Poweroff at the end</label>
+					<checked>0</checked>
+				</object>
+			</object>
+			<object class="sizeritem">
 				<option>1</option>
-				<flag>wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxEXPAND</flag>
+				<flag>wxTOP|wxBOTTOM|wxRIGHT|wxEXPAND|wxALIGN_CENTER_HORIZONTAL</flag>
 				<border>5</border>
 				<object class="wxListCtrl" name="lstOutput">
 					<style>wxLC_NO_HEADER|wxLC_REPORT</style>
@@ -106,6 +122,11 @@
 				<border>5</border>
 				<object class="wxStaticText" name="lblStatus">
 					<style>wxALIGN_CENTER_HORIZONTAL</style>
+					<font>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+					</font>
 					<label>Ready</label>
 					<wrap>-1</wrap>
 				</object>
