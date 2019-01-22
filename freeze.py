@@ -14,9 +14,16 @@ exe1 = Executable(
     base = "Win32GUI",
 )
 
+exe2 = Executable(
+    script = "daemon.py",
+    targetName = "pobkupd.exe",
+    icon = "icon.ico",
+    base = "Win32GUI",
+)
+
 setup(  name = "pobkup",
         version = "0.1",
         description = "A simple front end for rsync!",
         options = {"build_exe": build_exe_options},
-        executables = [exe1]
+        executables = [exe1,exe2]
         )

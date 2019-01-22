@@ -120,7 +120,6 @@ def notifySend(title, message):
 			print ("Error on notify")
 	if sys.platform=="win32":
 		try:
-			print(notifySendWin)
 			subprocess.call([notifySendWin, "-i", "info", title, message])		
 		except:
 			print ("Error on notify")
