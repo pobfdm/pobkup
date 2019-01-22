@@ -77,6 +77,7 @@ class MainApp(wx.App):
 		print("New profile...")
 		pr= Profiles()
 		pr.OnInit()
+		pr.dialog.Show()
 	
 	def editProfile(self,evt):
 		pr= Profiles()
@@ -184,7 +185,7 @@ class MainApp(wx.App):
 		if(self.chkPoweroff.IsChecked()):
 			print("Poweroff")
 			utils.poweroff()
-	
+		utils.notifySend("Pobkup", _("BACKUP TERMINATED."))
 	
 	
 	def onStartStop(self, evt):

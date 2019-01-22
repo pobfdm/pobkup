@@ -101,4 +101,34 @@ def poweroff():
 		subprocess.call(["shutdown", "/s"])
 	if sys.platform == "darwin":
 		subprocess.call(['osascript', '-e','tell app "System Events" to shut down'])	
+
+def notifySend(title, message):
+	if getattr(sys, 'frozen', False):
+			# frozen
+			iconPobkup= os.path.join(os.path.dirname(sys.executable),"icons","icon.png")
+			notifySendWin=os.path.join(os.path.dirname(sys.executable),"notify-send","notify-send.exe")
+	else:
+		# unfrozen
+		iconPobkup=os.path.join(os.path.dirname(os.path.realpath(__file__)),"icons","icon.png")
+		notifySendWin=os.path.join(os.path.dirname(os.path.realpath(__file__)),"notify-send","notify-send.exe")
 		
+		
+	if  sys.platform == 'linux':
+		try:
+			subprocess.call(["notify-send", title, message, "--icon="+iconPobkup])
+		except:
+			print ("Error on notify")
+	if sys.platform=="win32":
+		try:
+			subprocess.Popen([notifySendWin, "-i", "info", title, message],stdin=None, stdout=None, stderr=None)		
+		except:
+			print ("Error on notify")
+		
+	if sys.platform=="darwin":
+		try:
+			 os.system("""
+              osascript -e 'display notification "{}" with title "{}"'
+              """.format(message, title))	
+		except:
+			print ("Error on notify")
+				

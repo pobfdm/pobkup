@@ -2,7 +2,7 @@
 Type=Application
 Name=Pobkup
 GenericName=Pobkup 
-Comment=A simple gui to youtube-dl!
+Comment=A simple gui to Rsync!
 Exec=pobkup
 Icon=/usr/lib/pobkup/icons/icon.png
 Terminal=FALSE
