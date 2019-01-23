@@ -36,19 +36,37 @@ def startBackup(p):
 	delete=config.getboolean(p,'delete')
 	history=config.getboolean(p,'history')
 	excludeFile=config[p]['excludeFile']
+	logfile=config[p]['logfile']
 
 	cmd=[rsyncBin, '-avh', '--info=progress2']
 	if (delete==True): cmd.append('--delete')
 	if (len(excludeFile)>1) : cmd.append("--exclude-from="+excludeFile)
 	if (history==True): dst+=getTimeHistoryFolder()
+	if (logfile!=None): cmd.append("--log-file="+logfile) 
 	cmd.append(src)
 	cmd.append(dst)
+	
+	
+	#ExecuteBefore
+	try:
+		cmdBefore=config[p]['cmdbefore']
+		if(cmdBefore!=None): os.system(cmdBefore)
+	except:
+		pass
+	
 	
 	notifySend(_("Starting backup"), config[p].name+ _(" is starting..."))
 	print(config[p].name+ _(" is starting..."))
 	subprocess.call(cmd)
 	notifySend(_("Backup done."), config[p].name+ _(" is done."))
 	print(config[p].name+ _(" is done."))
+	
+	#ExecuteAfter
+	try:
+		cmdAfter=config[p]['cmdafter']
+		if(cmdAfter!=None): os.system(cmdAfter)
+	except:
+		pass
 
 
 for p in profiles:
@@ -72,5 +90,9 @@ for p in profiles:
 
 #Start scheduler
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+	try:
+		schedule.run_pending()
+		time.sleep(1)
+	except KeyboardInterrupt:
+		print("\n Bye bye...")
+		sys.exit()

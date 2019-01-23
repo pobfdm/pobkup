@@ -138,13 +138,24 @@ class MainApp(wx.App):
 		delete=self.config.getboolean(self.currProfile,'delete')
 		history=self.config.getboolean(self.currProfile,'history')
 		excludeFile=self.config[self.currProfile]['excludeFile']
+		logfile=self.config[self.currProfile]['logfile']
+		
 		
 		cmd=[rsyncBin, '-avh', '--info=progress2']
 		if (delete==True): cmd.append('--delete')
 		if (len(excludeFile)>1) : cmd.append("--exclude-from="+excludeFile)
 		if (history==True): dst+=utils.getTimeHistoryFolder()
+		if (logfile!=None): cmd.append("--log-file="+logfile) 
 		cmd.append(src)
 		cmd.append(dst)
+		
+		#ExecuteBefore
+		try:
+			cmdBefore=self.config[self.currProfile]['cmdbefore']
+			if(cmdBefore!=None): os.system(cmdBefore)
+		except:
+			pass	
+		
 		
 		fileOutErr = open(utils.getTempDir()+"pobkup-errors.txt","w")
 		print(cmd)
@@ -186,7 +197,13 @@ class MainApp(wx.App):
 			print("Poweroff")
 			utils.poweroff()
 		utils.notifySend("Pobkup", _("BACKUP TERMINATED."))
-	
+		
+		#ExecuteAfter at the end of job
+		try:
+			cmdAfter=self.config[self.currProfile]['cmdafter']
+			if(cmdBefore!=None): os.system(cmdAfter)
+		except:
+			pass
 	
 	def onStartStop(self, evt):
 		#Check src and dest

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import wx,gettext,locale, configparser,os,utils
 from wx import xrc
+import wx.adv
 from gui_utils import *
 
 class Profiles(wx.Dialog):
@@ -20,6 +21,18 @@ class Profiles(wx.Dialog):
 		self.chkDelete=xrc.XRCCTRL(self.dialog, 'chkDelete')
 		self.chkHistory=xrc.XRCCTRL(self.dialog, 'chkHistory')
 		self.filePickerExcludeFile=xrc.XRCCTRL(self.dialog, 'filePickerExcludeFile')
+		self.filePickerLogFile=xrc.XRCCTRL(self.dialog, 'filePickerLogFile')
+		self.txtCmdBefore=xrc.XRCCTRL(self.dialog, 'txtCmdBefore')
+		self.txtCmdAfter=xrc.XRCCTRL(self.dialog, 'txtCmdAfter')
+		
+		self.spinEveryMinutes=xrc.XRCCTRL(self.dialog, 'spinEveryMinutes')
+		self.spinEveryHours=xrc.XRCCTRL(self.dialog, 'spinEveryHours')
+		self.chkEveryDayAt=xrc.XRCCTRL(self.dialog, 'chkEveryDayAt')
+		self.chkEveryDayAt.SetValue(False)
+		self.timePickerEveryDayAt=xrc.XRCCTRL(self.dialog, 'timePickerEveryDayAt')
+		self.timePickerEveryDayAt.Enable(False)	
+		
+		
 		self.btSave=xrc.XRCCTRL(self.dialog, 'btSave')
 		self.btDelete=xrc.XRCCTRL(self.dialog, 'btDelete')
 		self.btCancel=xrc.XRCCTRL(self.dialog, 'btCancel')
@@ -28,6 +41,7 @@ class Profiles(wx.Dialog):
 		self.btSave.Bind(wx.EVT_BUTTON, self.save)
 		self.btDelete.Bind(wx.EVT_BUTTON, self.delete)
 		self.btCancel.Bind(wx.EVT_BUTTON, self.closeWindow)
+		self.chkEveryDayAt.Bind(wx.EVT_CHECKBOX, self.enableDisableEveryDayAt)
 		
 		
 		#Labels
@@ -47,12 +61,13 @@ class Profiles(wx.Dialog):
 		self.btSave.SetLabel(_("Save"))
 		self.btDelete.SetLabel(_("Delete"))
 		self.btCancel.SetLabel(_("Cancel"))
-		
-		
-		
-		
-		#self.dialog.Show()
 	
+	def enableDisableEveryDayAt(self, evt):
+		if (self.chkEveryDayAt.IsChecked()):
+			self.timePickerEveryDayAt.Enable(True)	
+		else:
+			self.timePickerEveryDayAt.Enable(False)
+			
 	def closeWindow(self, evt):
 		self.dialog.Close()
 	
@@ -70,6 +85,28 @@ class Profiles(wx.Dialog):
 		if (self.config[p]['delete']=='yes'): self.chkDelete.SetValue(True)
 		if (self.config[p]['history']=='yes'): self.chkHistory.SetValue(True)
 		self.filePickerExcludeFile.SetPath(self.config[p]['excludeFile'])
+		self.filePickerLogFile.SetPath(self.config[p]['logfile'])
+		self.txtCmdBefore.SetValue(self.config[p]['cmdbefore'])
+		self.txtCmdAfter.SetValue(self.config[p]['cmdafter'])
+		
+		try:
+			self.spinEveryMinutes.SetValue(self.config[p]['everyMinutes'])
+			self.spinEveryHours.SetValue(self.config[p]['everyHours'])
+		except:
+			pass
+			
+		try:
+			if (self.config[p]['everyDayAt']!=None and self.config[p]['everyDayAt']!=""):
+				time=self.config[p]['everyDayAt'].split(':')
+				hours=int(time[0])
+				mins=int(time[1])
+				secs=int(time[2])
+				self.timePickerEveryDayAt.SetTime(hours,mins,secs)
+				self.chkEveryDayAt.SetValue(True)
+				self.timePickerEveryDayAt.Enable(True)
+		except:
+			pass		
+			
 	
 	def save(self,evt):
 		try:
@@ -90,6 +127,19 @@ class Profiles(wx.Dialog):
 			else:
 				self.config[self.txtLabel.GetValue()]['history'] = "no"
 			self.config[self.txtLabel.GetValue()]['excludeFile'] = self.filePickerExcludeFile.GetPath()
+			self.config[self.txtLabel.GetValue()]['logfile'] = self.filePickerLogFile.GetPath()
+			self.config[self.txtLabel.GetValue()]['cmdbefore'] = self.txtCmdBefore.GetValue()
+			self.config[self.txtLabel.GetValue()]['cmdafter'] = self.txtCmdAfter.GetValue()
+			
+			if (self.spinEveryMinutes.GetValue()>0): self.config[self.txtLabel.GetValue()]['everyMinutes'] = str(self.spinEveryMinutes.GetValue())
+			if(self.spinEveryHours.GetValue()>0): self.config[self.txtLabel.GetValue()]['everyHours'] = str(self.spinEveryHours.GetValue())
+			
+			if(self.chkEveryDayAt.IsChecked()):
+				hours=str(self.timePickerEveryDayAt.GetTime()[0])
+				mins=str(self.timePickerEveryDayAt.GetTime()[1])
+				secs=str(self.timePickerEveryDayAt.GetTime()[2])
+				self.config[self.txtLabel.GetValue()]['everyDayAt'] = "%s:%s:%s" % (hours, mins,secs)
+				
 		
 			with open(utils.getProfilesFilePath(), 'w') as configfile:
 				self.config.write(configfile)

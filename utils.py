@@ -53,11 +53,14 @@ def initConfig():
 		config['backup']['dst'] = ""
 		config['backup']['delete'] = "yes"
 		config['backup']['history'] = "no"
-		config['backup']['service'] = "no"
-		config['backup']['dayofweek'] = ""
 		config['backup']['excludeFile'] = ""
-		config['backup']['time'] = ""
-		config['backup']['lastbackup'] = ""
+		config['backup']['cmdBefore'] = ""
+		config['backup']['cmdAfter'] = ""
+		config['backup']['logfile'] = ""
+		config['backup']['everyMinutes'] = ""
+		config['backup']['everyHours'] = ""
+		config['backup']['everyDayAt'] = ""
+		
 		with open(profilesFile, 'w') as configfile:
 			config.write(configfile)
 
