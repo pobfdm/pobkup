@@ -57,7 +57,6 @@ class MainApp(wx.App):
 		self.btBackup.Bind(wx.EVT_BUTTON, self.onStartStop)
 		self.cmbProfiles.Bind(wx.EVT_COMBOBOX, self.setProfile)
 		self.frame.Bind(wx.EVT_CLOSE, self.quit)
-		self.frame.Bind(wx.EVT_ACTIVATE, self.initComboBoxProfiles)
 		self.btEditProfile.Bind(wx.EVT_BUTTON, self.editProfile)
 		
 		#Labels 
@@ -66,6 +65,7 @@ class MainApp(wx.App):
 		self.mnuItemNewProfile.SetItemLabel(_("New Profile\tCTRL+n"))
 		self.mnuItemExit.SetItemLabel(_("Exit\tCTRL+q"))
 		
+		self.loadCmbProfiles()
 		self.frame.Show()
 	
 	def enableScheduler(self, evt):
@@ -96,18 +96,29 @@ class MainApp(wx.App):
 			sys.exit()
 			
 			
+	def loadCmbProfiles(self):
+		self.config = configparser.ConfigParser()
+		self.config.read(utils.getProfilesFilePath())
+		profiles=self.config.sections()
+		self.cmbProfiles.Clear()
+		for p in profiles:
+			self.cmbProfiles.Append(p)
+		
+		self.cmbProfiles.SetSelection(self.cmbProfiles.GetCount()-1)	
+		self.currProfile=self.cmbProfiles.GetValue()
 		
 	def newProfiles(self,evt):
-		print("New profile...")
 		pr= Profiles()
 		pr.OnInit()
-		pr.dialog.Show()
+		pr.dialog.ShowModal()
+		self.loadCmbProfiles()
 	
 	def editProfile(self,evt):
 		pr= Profiles()
 		pr.OnInit()
 		pr.setProfile(self.currProfile)
-		pr.dialog.Show()
+		pr.dialog.ShowModal()
+		self.loadCmbProfiles()
 		
 		
 	def setProfile(self, evt):
@@ -126,9 +137,15 @@ class MainApp(wx.App):
 	
 	def busyGui(self):
 		wx.CallAfter(self.btBackup.SetLabel, "Stop!")
+		wx.CallAfter(self.cmbProfiles.Enable, False)
+		wx.CallAfter(self.btEditProfile.Enable, False)
 	
 	def readyGui(self):
 		wx.CallAfter(self.btBackup.SetLabel, "Backup!")
+		wx.CallAfter(self.cmbProfiles.Enable, True)
+		wx.CallAfter(self.btEditProfile.Enable, True)
+	
+		
 	
 	def	appendOutput(self,s):
 		count=self.lstOutput.GetItemCount()
@@ -190,7 +207,7 @@ class MainApp(wx.App):
 			
 			#Print Output
 			self.appendOutput(str(out.decode("utf-8")))
-			#print(str(out.decode("utf-8")))
+			#wx.CallAfter(self.appendOutput, str(out.decode("utf-8")))
 			
 			#Print Progress
 			if (self.getPercent(str(out.decode("utf-8"))) is not None):
