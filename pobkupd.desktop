@@ -1,0 +1,10 @@
+[Desktop Entry] 
+Type=Application
+Name=Pobkupd
+GenericName=Pobkupd 
+Comment=Pobkup daemon
+Exec=python3 /usr/lib/pobkup/pobkupd.py
+Icon=/usr/lib/pobkup/icons/icon.png
+Terminal=FALSE
+StartupNotify=TRUE
+Categories=Utility;
