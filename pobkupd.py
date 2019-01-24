@@ -57,10 +57,14 @@ def startBackup(p):
 	
 	notifySend(_("Starting backup"), config[p].name+ _(" is starting..."))
 	print(config[p].name+ _(" is starting..."))
-	subprocess.call(cmd)
-	notifySend(_("Backup done."), config[p].name+ _(" is done."))
-	print(config[p].name+ _(" is done."))
-	
+	try:
+		subprocess.call(cmd)
+		notifySend(_("Backup done."), config[p].name+ _(" is done."))
+		print(config[p].name+ _(" is done."))
+	except:
+		notifySend(_("Backup Error"), config[p].name+ _(" had a problem!"))
+		print(config[p].name+ _(" had a problem!"))
+		
 	#ExecuteAfter
 	try:
 		cmdAfter=config[p]['cmdafter']

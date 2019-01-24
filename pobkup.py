@@ -34,12 +34,18 @@ class MainApp(wx.App):
 		self.menubar = self.frame.GetMenuBar()
 		self.mnuItemExit = self.menubar.FindItemById(xrc.XRCID('mnuItemExit'))
 		self.mnuItemNewProfile = self.menubar.FindItemById(xrc.XRCID('mnuItemNewProfile')) 
-		self.mnuItemAbout = self.menubar.FindItemById(xrc.XRCID('mnuItemAbout'))    
+		self.mnuItemAbout = self.menubar.FindItemById(xrc.XRCID('mnuItemAbout'))
+		self.mnuItemEnableScheduler = self.menubar.FindItemById(xrc.XRCID('mnuItemEnableScheduler'))
+		self.mnuItemDisableScheduler = self.menubar.FindItemById(xrc.XRCID('mnuItemDisableScheduler'))
+		    
 		
 		#Bind event Menu
 		self.frame.Bind(wx.EVT_MENU, self.quit, self.mnuItemExit)
 		self.frame.Bind(wx.EVT_MENU, self.newProfiles, self.mnuItemNewProfile)
 		self.frame.Bind(wx.EVT_MENU, self.onAbout, self.mnuItemAbout)
+		
+		self.frame.Bind(wx.EVT_MENU, self.enableScheduler, self.mnuItemEnableScheduler)
+		self.frame.Bind(wx.EVT_MENU, self.disableScheduler, self.mnuItemDisableScheduler)
 		
 		#Init ListCtrl
 		self.lstOutput.InsertColumn(0, "File")
@@ -62,6 +68,24 @@ class MainApp(wx.App):
 		
 		self.frame.Show()
 	
+	def enableScheduler(self, evt):
+		if sys.platform=="darwin":
+			Info(self.frame, _("Please enable manually ' python3 pobkupd.py' at the boot"), caption = 'Info')
+			return
+		
+		if (utils.installPobkupd()==True):
+			Info(self.frame, _("Pobkupd is enabled. Please restart session to run it"), caption = 'Info')
+		else:
+			Warn(self.frame, _("Error on enable Pobkupd !"), _("Warning !"))
+		
+		
+	
+	def disableScheduler(self, evt):
+		if (utils.removePobkupd()==True):
+			Info(self.frame, _("Pobkupd is disabled. Please restart session to stop it"), caption = 'Info')
+		else:
+			Warn(self.frame, _("Error on disable Pobkupd !"), _("Warning !"))
+		
 	def setStatus(self,s):
 		wx.CallAfter(self.lblStatus.SetLabel, s)
 	

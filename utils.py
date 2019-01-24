@@ -38,6 +38,7 @@ def getConfigDirPath():
 def getProfilesFilePath():
 	p=getConfigDirPath()+"profiles.conf"
 	return p
+
 	
 
 def initConfig():
@@ -123,7 +124,8 @@ def notifySend(title, message):
 			print ("Error on notify")
 	if sys.platform=="win32":
 		try:
-			subprocess.call([notifySendWin, "-i", "info", title, message])		
+			#subprocess.call([notifySendWin, "-i", "info", title, message])
+			subprocess.Popen([notifySendWin, "-i", "info", title, message])	
 		except:
 			print ("Error on notify")
 			
@@ -136,4 +138,91 @@ def notifySend(title, message):
               """.format(message, title))	
 		except:
 			print ("Error on notify")
-				
+
+def getAutorunFolder():
+	if sys.platform=="win32":
+		return getHomeDirPath()+"\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\"
+	if  sys.platform == 'linux':
+		return getHomeDirPath()+"/.config/autostart/"
+
+
+
+
+ 
+def createWinShortcut(src, link, workingDir, icon):    
+	vbscript='''
+	Set oWS = WScript.CreateObject("WScript.Shell")
+	sLinkFile = "%s"
+	Set oLink = oWS.CreateShortcut(sLinkFile)
+		oLink.TargetPath = "%s"
+	 '  oLink.Arguments = ""
+	   oLink.Description = "Pobkupd.  The Pobkup deamon "   
+	 '  oLink.HotKey = "ALT+CTRL+F"
+	   oLink.IconLocation = "%s, 2"
+	 '  oLink.WindowStyle = "1"   
+	   oLink.WorkingDirectory = "%s"
+	oLink.Save
+	''' % (link, src, icon, workingDir)
+	path=getTempDir()+'createShortcut.vbs'
+	print(vbscript,  file=open(path, 'w'))
+	os.system(path)
+	
+def installPobkupd():
+	if  sys.platform == 'linux':
+		src=os.path.join(os.path.dirname(os.path.realpath(__file__)),"pobkupd.desktop")
+		dst=getAutorunFolder()+"pobkupd.desktop"
+		try:
+			shutil.copyfile(src, dst)
+		except:
+			pass				
+	
+	
+	if  sys.platform == 'win32':
+		if getattr(sys, 'frozen', False):
+			# frozen
+			src=os.path.join(os.path.dirname(sys.executable),"pobkupd.exe") 
+			dst=getAutorunFolder()+"pobkupd.lnk"
+			pobkupDir=os.path.join(os.path.dirname(sys.executable))
+			icon=os.path.join(os.path.dirname(sys.executable),"pobkupd.exe") 
+		else:
+			# unfrozen
+			src=os.path.join(os.path.dirname(os.path.realpath(__file__)),"pobkupd.py")
+			dst=getAutorunFolder()+"pobkupd.lnk"
+			pobkupDir=os.path.join(os.path.dirname(os.path.realpath(__file__)))
+			icon=sys.executable
+		
+		createWinShortcut(src,dst,pobkupDir,icon)
+		
+	if (os.path.isfile(dst)):
+		return True
+	else:
+		return False
+
+def removePobkupd():
+	if  sys.platform == 'linux':
+		dst=getAutorunFolder()+"pobkupd.desktop"
+		if (os.path.isfile(dst)):
+			os.remove(dst)	
+		if (not os.path.isfile(dst)):
+			return True
+		else:	
+			return False		
+
+	if  sys.platform == 'win32':
+		if getattr(sys, 'frozen', False):
+			# frozen
+			dst=getAutorunFolder()+"pobkupd.lnk"
+		else:
+			# unfrozen
+			dst=getAutorunFolder()+"pobkupd.lnk"
+		
+		if (os.path.isfile(dst)):
+			os.remove(dst)	
+		if (not os.path.isfile(dst)):
+			os.system("TASKKILL /F /IM pobkupd.exe")
+			return True
+		else:	
+			return False
+
+
+

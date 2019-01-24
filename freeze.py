@@ -15,7 +15,7 @@ exe1 = Executable(
 )
 
 exe2 = Executable(
-    script = "daemon.py",
+    script = "pobkupd.py",
     targetName = "pobkupd.exe",
     icon = "icon.ico",
     base = "Win32GUI",

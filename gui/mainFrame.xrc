@@ -15,6 +15,17 @@
 					<label>New Profile</label>
 					<help></help>
 				</object>
+				<object class="wxMenu" name="mnuScheduler">
+					<label>Scheduler</label>
+					<object class="wxMenuItem" name="mnuItemEnableScheduler">
+						<label>Enable</label>
+						<help></help>
+					</object>
+					<object class="wxMenuItem" name="mnuItemDisableScheduler">
+						<label>Disable</label>
+						<help></help>
+					</object>
+				</object>
 				<object class="wxMenuItem" name="mnuItemExit">
 					<label>Exit</label>
 					<help></help>
