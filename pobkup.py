@@ -218,11 +218,8 @@ class MainApp(wx.App):
 		utils.notifySend("Pobkup", _("BACKUP TERMINATED."))
 		
 		#ExecuteAfter at the end of job
-		try:
-			cmdAfter=self.config[self.currProfile]['cmdafter']
-			if(cmdBefore!=None): os.system(cmdAfter)
-		except:
-			pass
+		cmdAfter=self.config[self.currProfile]['cmdafter']
+		if(cmdAfter!=None): os.system(cmdAfter)
 	
 	def onStartStop(self, evt):
 		
