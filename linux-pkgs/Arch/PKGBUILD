@@ -37,6 +37,7 @@ package() {
   mkdir -p "$pkgdir/usr/share/applications"
   cp "$srcdir/pobkup-master/pobkup" "$pkgdir/usr/bin/"
   cp  "$srcdir/pobkup-master/pobkup.py" "$pkgdir/usr/lib/pobkup/"
+  cp  "$srcdir/pobkup-master/pobkupd.py" "$pkgdir/usr/lib/pobkup/"
   cp  "$srcdir/pobkup-master/profiles.py" "$pkgdir/usr/lib/pobkup/"
   cp  "$srcdir/pobkup-master/gui_utils.py" "$pkgdir/usr/lib/pobkup/"
   cp  "$srcdir/pobkup-master/utils.py" "$pkgdir/usr/lib/pobkup/"
