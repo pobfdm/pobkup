@@ -169,7 +169,7 @@ def createWinShortcut(src, link, workingDir, icon):
 	
 def installPobkupd():
 	if  sys.platform == 'linux':
-		src="/usr/share/applications/pobkupd.desktop"
+		src="/usr/lib/pobkup/pobkupd.desktop"
 		dst=getAutorunFolder()+"pobkupd.desktop"
 		try:
 			shutil.copyfile(src, dst)

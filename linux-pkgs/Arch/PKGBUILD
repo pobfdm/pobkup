@@ -44,7 +44,7 @@ package() {
   cp  "$srcdir/pobkup-master/utils.py" "$pkgdir/usr/lib/pobkup/"
   cp  "$srcdir/pobkup-master/icon.ico" "$pkgdir/usr/lib/pobkup/"
   cp  "$srcdir/pobkup-master/pobkup.desktop" "$pkgdir/usr/share/applications"
-  cp  "$srcdir/pobkup-master/pobkupd.desktop" "$pkgdir/usr/share/applications"
+  cp  "$srcdir/pobkup-master/pobkupd.desktop" "$pkgdir/usr/lib/pobkup/"
   cp -R "$srcdir/pobkup-master/icons/" "$pkgdir/usr/lib/pobkup/"
   cp -R "$srcdir/pobkup-master/locale/" "$pkgdir/usr/lib/pobkup/"
   cp -R "$srcdir/pobkup-master/gui/" "$pkgdir/usr/lib/pobkup/"
