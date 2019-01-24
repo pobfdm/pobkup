@@ -173,12 +173,7 @@ class MainApp(wx.App):
 		cmd.append(src)
 		cmd.append(dst)
 		
-		#ExecuteBefore
-		try:
-			cmdBefore=self.config[self.currProfile]['cmdbefore']
-			if(cmdBefore!=None): os.system(cmdBefore)
-		except:
-			pass	
+			
 		
 		
 		fileOutErr = open(utils.getTempDir()+"pobkup-errors.txt","w")
@@ -230,6 +225,15 @@ class MainApp(wx.App):
 			pass
 	
 	def onStartStop(self, evt):
+		
+		#ExecuteBefore
+		try:
+			cmdBefore=self.config[self.currProfile]['cmdbefore']
+			if(cmdBefore!=None): os.system(cmdBefore)
+		except:
+			pass
+		
+		
 		#Check src and dest
 		src=self.config[self.currProfile]['src']
 		dst=self.config[self.currProfile]['dst']
