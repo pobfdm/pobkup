@@ -115,3 +115,24 @@ msgstr "Attenzione!"
 
 msgid "Poweroff at the end"
 msgstr "Spegni al termine"
+
+msgid "Options:"
+msgstr "Opzioni:"
+
+msgid "Log file:"
+msgstr "File di log:"
+
+msgid "Execute before:"
+msgstr "Prima esegui:"
+
+msgid "Execute after:"
+msgstr "Dopo esegui:"
+
+msgid "Every minutes:"
+msgstr "Ogni n minuti:"
+
+msgid "Every hours:"
+msgstr "Ogni n ore:"
+
+msgid "Every day at:"
+msgstr "Ogni giorno alle:"

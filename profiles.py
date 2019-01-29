@@ -30,7 +30,8 @@ class Profiles(wx.Dialog):
 		self.chkEveryDayAt=xrc.XRCCTRL(self.dialog, 'chkEveryDayAt')
 		self.chkEveryDayAt.SetValue(False)
 		self.timePickerEveryDayAt=xrc.XRCCTRL(self.dialog, 'timePickerEveryDayAt')
-		self.timePickerEveryDayAt.Enable(False)	
+		self.timePickerEveryDayAt.Enable(False)
+		
 		
 		
 		self.btSave=xrc.XRCCTRL(self.dialog, 'btSave')
@@ -50,6 +51,14 @@ class Profiles(wx.Dialog):
 		self.lblSrc=xrc.XRCCTRL(self.dialog, 'lblSrc')
 		self.lblDst=xrc.XRCCTRL(self.dialog, 'lblDst')
 		self.lblExcludeFile=xrc.XRCCTRL(self.dialog,'lblExcludeFile')
+		self.lblOptions=xrc.XRCCTRL(self.dialog,'lblOptions')
+		self.lblLogFile=xrc.XRCCTRL(self.dialog,"lblLogFile")
+		
+		self.lblCmdBefore=xrc.XRCCTRL(self.dialog,"lblCmdBefore")
+		self.lblCmdAfter=xrc.XRCCTRL(self.dialog,"lblCmdAfter")
+		self.lblEveryMinutes=xrc.XRCCTRL(self.dialog,"lblEveryMinutes")
+		self.lblEveryHours=xrc.XRCCTRL(self.dialog,"lblEveryHours")
+		self.chkEveryDayAt=xrc.XRCCTRL(self.dialog,"chkEveryDayAt")
 		
 		self.lblOperation.SetLabel(_("Profile"))
 		self.lblLabel.SetLabel(_("Label:"))
@@ -58,6 +67,20 @@ class Profiles(wx.Dialog):
 		self.chkDelete.SetLabel(_("Delete file from destination"))
 		self.chkHistory.SetLabel(_("History"))
 		self.lblExcludeFile.SetLabel(_("Exclude path from file:"))
+		
+		self.lblOptions.SetLabel(_("Options:"))
+		self.lblLogFile.SetLabel(_("Log file:"))
+		self.lblCmdBefore.SetLabel(_("Execute before:"))
+		self.lblCmdAfter.SetLabel(_("Execute after:"))
+		self.lblEveryMinutes.SetLabel(_("Every minutes:"))
+		self.lblEveryHours.SetLabel(_("Every hours:"))
+		self.chkEveryDayAt.SetLabel(_("Every day at:"))
+		
+		
+		
+		
+		
+		
 		self.btSave.SetLabel(_("Save"))
 		self.btDelete.SetLabel(_("Delete"))
 		self.btCancel.SetLabel(_("Cancel"))

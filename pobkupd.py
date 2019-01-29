@@ -30,8 +30,18 @@ def startBackup(p):
 		dst=config[p]['dst']
 	else:
 		src=PathWinToUnix(config[p]['src'])
-		dst=PathWinToUnix(config[p]['dst'])	
-
+		dst=PathWinToUnix(config[p]['dst'])
+	
+	
+	#Check src and dest
+	if (not checkPath(src)):
+		notifySend(_("Error"), config[p].name+" " +_("Source not present"))
+		return
+		
+	if (not checkPath(dst)):
+		notifySend(_("Error"), config[p].name+" "+ _("Destination not present"))	
+		return
+		
 	rsyncBin=getRsyncPath()
 	delete=config.getboolean(p,'delete')
 	history=config.getboolean(p,'history')
