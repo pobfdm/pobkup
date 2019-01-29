@@ -136,3 +136,15 @@ msgstr "Ogni n ore:"
 
 msgid "Every day at:"
 msgstr "Ogni giorno alle:"
+
+msgid "Please enable manually ' python3 pobkupd.py' at the boot"
+msgstr "Per favore fai in modo che all'avvio enga eseguito 'python3 pobkup.d.py' "
+
+msgid "Pobkupd is enabled. Please restart session to run it"
+msgstr "Pobkupd e' abilitato. Per favore riavvia la sessione per avviarlo"
+
+msgid "Pobkupd is disabled. Please restart session to stop it"
+msgstr "Pobkupd e' disabilitato. Per favore riavvia la sessione per fermarlo"
+
+msgid  "Error on enable Pobkupd !"
+msgstr "Errore nell'abilitare il demone Pobkupd"
