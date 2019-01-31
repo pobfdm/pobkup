@@ -1,0 +1,8 @@
+pobkup /usr/bin/
+*.py /usr/lib/pobkup
+pobkupd.desktop /usr/lib/pobkup
+pobkup.desktop /usr/share/applications/
+locale/ /usr/lib/pobkup
+icons/ /usr/lib/pobkup
+icon.ico /usr/lib/pobkup
+gui/ /usr/lib/pobkup
