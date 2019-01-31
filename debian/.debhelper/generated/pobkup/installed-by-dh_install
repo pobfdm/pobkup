@@ -1,0 +1,14 @@
+./pobkup
+./freeze.py
+./gui_utils.py
+./pobkup.py
+./pobkupd.py
+./profiles.py
+./schedule.py
+./utils.py
+./pobkupd.desktop
+./pobkup.desktop
+./locale/
+./icons/
+./icon.ico
+./gui/

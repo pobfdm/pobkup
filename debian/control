@@ -1,0 +1,14 @@
+Source: pobkup
+Section: utility
+Priority: optional
+Maintainer: Fabio Di Matteo <pobfdm@gmail.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: https://github.com/pobfdm/pobkup
+#Vcs-Git: https://github.com/pobfdm/pobkup.git
+#Vcs-Browser: https://github.com/pobfdm/pobkup.git
+
+Package: pobkup
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3 , python3-wxgtk4.0, rsync
+Description: A simple gui for Rsync
