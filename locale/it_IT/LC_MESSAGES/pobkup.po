@@ -138,7 +138,7 @@ msgid "Every day at:"
 msgstr "Ogni giorno alle:"
 
 msgid "Please enable manually ' python3 pobkupd.py' at the boot"
-msgstr "Per favore fai in modo che all'avvio enga eseguito 'python3 pobkup.d.py' "
+msgstr "Per favore fai in modo che all'avvio enga eseguito 'python3 pobkupd.py' "
 
 msgid "Pobkupd is enabled. Please restart session to run it"
 msgstr "Pobkupd e' abilitato. Per favore riavvia la sessione per avviarlo"

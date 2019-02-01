@@ -224,5 +224,14 @@ def removePobkupd():
 		else:	
 			return False
 
+def checkIsRunning(program):
+	import psutil
+	for pid in psutil.pids():
+		p = psutil.Process(pid)
+		if p.name() == program :
+			return True
+	return False
+
+
 
 

@@ -73,6 +73,13 @@ class MainApp(wx.App):
 			Info(self.frame, _("Please enable manually ' python3 pobkupd.py' at the boot"), caption = 'Info')
 			return
 		
+		#On mate desktop you have to do manually
+		if (utils.checkIsRunning("mate-session")):
+			Info(self.frame, _("Please enable manually ' python3 pobkupd.py' at the boot"), caption = 'Info')
+			subprocess.Popen(['mate-session-properties'])
+			return
+		
+		
 		if (utils.installPobkupd()==True):
 			Info(self.frame, _("Pobkupd is enabled. Please restart session to run it"), caption = 'Info')
 		else:

@@ -11,5 +11,5 @@ Homepage: https://github.com/pobfdm/pobkup
 Package: pobkup
 Architecture: any
 #Depends: ${shlibs:Depends}, ${misc:Depends}, python3 , python3-wxgtk4.0, rsync
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3 , rsync
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, python3-psutil , rsync
 Description: A simple gui for Rsync
