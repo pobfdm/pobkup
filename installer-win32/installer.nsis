@@ -48,7 +48,7 @@ Section "Install"
 	; Setto la directory dove mettere i file da questo momento in poi
 	; (se la directory non esiste, la creera') e copio i file.
 	SetOutPath $INSTDIR
-	File /r ..\build\exe.win-amd64-3.6\*
+	File /r ..\build\exe.win-amd64-3.7\*
  
  
 	;Menu start
