@@ -34,7 +34,7 @@
       <a class="nav-item nav-link" href="index.php?page=license">License</a>
       <a class="nav-item nav-link" href="index.php?page=authors">Authors</a>
       <a class="nav-item nav-link" href="index.php?page=documentation">Documentation</a>
-      <a class="nav-item nav-link" href="https://github.com/pobfdm/pobshare/issues">Report a problem</a>
+      <a class="nav-item nav-link" href="https://github.com/pobfdm/pobkup/issues" target="_blank">Report a problem</a>
     </div>
   </div>
 </nav>

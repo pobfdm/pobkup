@@ -25,7 +25,7 @@
 <hr class="my-4"> 
 
 <h3>Artist:</h3>
-<p class="lead"><a href="https://www.iconfinder.com/Ampeross">Arthur Zaynullin</a></p>
+<p class="lead"><a href="https://www.iconfinder.com/Ampeross" target="_blank">Arthur Zaynullin</a></p>
 <hr class="my-4"> 
   
 </div>
