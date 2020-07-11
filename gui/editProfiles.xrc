@@ -70,7 +70,7 @@
 						<object class="wxDirPickerCtrl" name="dirPickerSrc">
 							<value>/home/fabio</value>
 							<message>Select a folder</message>
-							<style>wxDIRP_DEFAULT_STYLE</style>
+							<style>wxDIRP_CHANGE_DIR|wxDIRP_DEFAULT_STYLE|wxDIRP_USE_TEXTCTRL</style>
 						</object>
 					</object>
 				</object>
@@ -97,7 +97,7 @@
 						<object class="wxDirPickerCtrl" name="dirPickerDst">
 							<value>/home/fabio</value>
 							<message>Select a folder</message>
-							<style>wxDIRP_DEFAULT_STYLE</style>
+							<style>wxDIRP_DEFAULT_STYLE|wxDIRP_USE_TEXTCTRL</style>
 						</object>
 					</object>
 				</object>
